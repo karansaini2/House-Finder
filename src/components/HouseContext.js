@@ -33,7 +33,7 @@ const HouseContextProvider = ({ children }) => {
     //create a function that checks if the string includes any
 
     const isDefault = (str) => {
-      return str.split(" ").includes("(any)");
+      return str.includes("(any)");
     };
 
     const minPrice = parseInt(price.split(" ")[0]);
@@ -42,14 +42,14 @@ const HouseContextProvider = ({ children }) => {
     const newHouses = housesData.filter((house) => {
       const housePrice = parseInt(house.price);
 
-      if (
-        house.country === country &&
-        house.type === property &&
-        housePrice >= minPrice &&
-        housePrice <= maxPrice
-      ) {
-        return house;
-      }
+      // if (
+      //   house.country === country &&
+      //   house.type === property &&
+      //   housePrice >= minPrice &&
+      //   housePrice <= maxPrice
+      // ) {
+      //   return house;
+      // }
 
       //if all values are deafault
       if (isDefault(country) && isDefault(property) && isDefault(price)) {
@@ -83,7 +83,7 @@ const HouseContextProvider = ({ children }) => {
 
       if (!isDefault(country) && !isDefault(property) && !isDefault(price)) {
         if (housePrice >= minPrice && housePrice <= maxPrice) {
-          return house.type === property;
+          return house.type === property && house.country === country;
         }
       }
     });
